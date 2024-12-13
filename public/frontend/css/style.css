@@ -1,0 +1,273 @@
+/* General Styles */
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+}
+
+/* About Section */
+.about {
+    background-color: #152e46 ;
+    padding: 80px 0;
+}
+
+/* Portfolio Section */
+.portfolio {
+    padding: 80px 0;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+/* Contact Section */
+.contact {
+    padding: 60px 20px;
+}
+
+/* Footer */
+footer {
+    height: 130px;
+    background-color: #000000 ;
+    color: #fff;
+}
+main{
+    padding-bottom: 2rem;
+}
+
+
+.rounded-circle {
+    width: 150px; /* or any size you prefer */
+    height: 150px; /* ensure the height is the same as width */
+    object-fit: cover; /* this ensures the image covers the entire area */
+}
+
+.custom-navbar {
+    background-color:  #000000; /* Cyan-Blue color */
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+.navbar .collapse .navbar-nav .nav-item .nav-link{
+    color: #ffffff; /* Change color to yellow on hover */
+}
+
+.navbar .collapse .navbar-nav .nav-item .nav-link:hover {
+    color: #ffc93c; /* Change color to yellow on hover */
+}
+
+footer p {
+     margin-top: 2rem; 
+     margin-bottom: 0;
+}
+
+.col-md-6{
+    margin-top: 60px;
+}
+.row{
+    margin-top: 50px;
+}
+
+.t-shirt {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.t-shirt img {
+    width: 100%;
+}
+
+.t-shirt p {
+    margin: 10px 0;
+}
+
+.t-shirt button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+a img {
+    transition: transform 0.2s; /* Animation */
+}
+
+a img:hover {
+    transform: scale(1.05); /* Zoom effect */
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 40px;
+}
+
+.search-bar input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+/* Responsive Design */
+/* @media (max-width: 768px) {
+    .search-bar {
+        width: 100%;
+    }
+} */
+
+@media (max-width: 768px) {
+    .search-bar {
+      width: 100%;
+    }
+  
+    .search-button {
+      padding: 8px 16px; /* Adjust padding for smaller screens */
+      font-size: 14px;
+    }
+  }
+
+.search-button {
+    background-color: #5571ff; /* Blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  flex-shrink: 0; /* Prevent the button from shrinking too much */
+    width: 80px;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3; /* Darker blue on hover   
+   */
+  }
+
+
+  /* fhdfydfhd */
+
+
+  .product-page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.breadcrumb a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.product-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.thumbnail-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail-images img {
+    width: 60px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-info h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.price {
+    font-size: 20px;
+    color: #e67e22;
+    margin-top: 5px;
+}
+
+label, select, .quantity, .add-to-cart {
+    display: block;
+    margin-top: 15px;
+}
+
+.quantity input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.add-to-cart {
+    background-color: #e67e22;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background-color: #d35400;
+}
+
+.product-description {
+    margin-top: 20px;
+}
+
+.product-description h2 {
+    font-size: 18px;
+    color: #333;
+}
+
+.product-description p {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column;
+        align-items: center;
+    }
+    .product-image, .product-info {
+        max-width: 100%;
+    }
+}
