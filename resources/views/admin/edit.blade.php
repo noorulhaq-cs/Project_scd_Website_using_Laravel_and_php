@@ -84,7 +84,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.update', $product->id) }}" method="POST">
+            <form action="{{ route('admin.update', $product->id) }}" method="POST" enctype="multipart/form-data" >
                 @csrf
                 @method('PUT')
                 <div>
@@ -100,8 +100,12 @@
                     <input type="number" id="price" name="price" value="{{ $product->price }}">
                 </div>
                 <div>
-                    <label for="category">Category:</label>
-                    <input type="text" id="category" name="category" value="{{ $product->category }}">
+                    <label for="image">Choose file</label>
+                    <input type="file" name="image" id="image">
+                </div>
+                <div>
+                    <label for="categorie_id">Category:</label>
+                    <input type="number" name="categorie_id" id="categorie_id">
                 </div>
                 <div>
                     <button type="submit">Update Product</button>

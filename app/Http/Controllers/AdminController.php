@@ -24,15 +24,20 @@ class AdminController extends Controller
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'color' => 'required',
             'price' => 'required|numeric',
-            'category' => 'required'
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:3000',
+            'categorie_id' => 'required'
         ]);
 
-        Product::create($request->all());
-
+        
+        $path = $request->file('image')->store('image','public');
+        $filename = basename($path);
+        $data['image'] = $filename;
+        
+        Product::create($data);
         return redirect()->route('admin.index')->with('success', 'Product created successfully.');
     }
 
@@ -52,20 +57,38 @@ class AdminController extends Controller
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'color' => 'required',
-            'price' => 'required|numeric',
-            // 'image' => 'required',
-            'category' => 'required'
-        ]);
+{
+    // Validate the incoming request
+    $data = $request->validate([
+        'name' => 'required',
+        'color' => 'required',
+        'price' => 'required|numeric',
+        'image' => 'nullable|image|mimes:png,jpg,jpeg|max:3000',
+        'categorie_id' => 'required'
+    ]);
 
-        $product=Product::findOrFail($id);
-        $product->update($request->all());
+    // Find the product or fail
+    $product = Product::findOrFail($id);
 
-        return redirect()->route('admin.index')->with('success', 'Product updated successfully.');
+    // Check and handle image upload
+    if ($request->hasFile('image')) {
+        // Delete old image if it exists
+        if ($product->image && file_exists(storage_path('app/public/image/' . $product->image))) {
+            unlink(storage_path('app/public/image/' . $product->image));
+        }
+
+        // Store new image and update the 'image' field
+        $path = $request->file('image')->store('image', 'public');
+        $data['image'] = basename($path);
     }
+
+    // Update the product with validated data
+    $product->update($data);
+
+    // Redirect with success message
+    return redirect()->route('admin.index')->with('success', 'Product updated successfully.');
+}
+
 
     // Remove the specified resource from storage.
     public function destroy($id)

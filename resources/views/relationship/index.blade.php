@@ -81,11 +81,6 @@
     <main>
         <div class="container">
             <h2>Product List</h2>
-            <a href="{{ route('admin.create') }}">Add New Product</a>
-            {{-- <a href="{{ route('relationship.index')  }}" class="btn btn-primary">Display</a> --}}
-            @if ($message = Session::get('success'))
-                <div class="success-message">{{ $message }}</div>
-            @endif
             <table>
                 <tr>
                     <th>Name</th>
@@ -101,13 +96,7 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product['category']['name'] }}</td>
                         <td>
-                            <a href="{{ route('admin.show', $product->id) }}">View</a> |
-                            <a href="{{ route('admin.edit', $product->id) }}">Edit</a> |
-                            <form action="{{ route('admin.destroy', $product->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">Delete</button>
-                            </form>
+                            <a href="{{ route('relationship.show', $product->id) }}">View</a> |
                         </td>
                     </tr>
                 @endforeach

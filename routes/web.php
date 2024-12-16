@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelationshipController;
 use App\Http\Middleware\ValidAdmin;
+use Illuminate\Database\Eloquent\Factories\Relationship;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoldWareController;
 use App\Http\Controllers\AdminController;
@@ -37,6 +39,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('admin', AdminController::class);
 // ->middleware(ValidAdmin::class);
 Route::resource('categories', CategoryController::class);
+
+Route::resource('relationship', RelationshipController::class);
 
 Route::get('/search', [AdminController::class, 'search'])->name('search');
 

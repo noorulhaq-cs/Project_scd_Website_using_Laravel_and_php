@@ -57,20 +57,13 @@
     <main>
         <div class="container">
             <h2>Product Details</h2>
-
-            @if($product['image'])
-                <img src="{{ asset('storage/image/' . $product['image']) }}" alt="{{ $product['name'] }}" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-            @else
-                <img src="{{ asset('image/default-profile.png') }}" alt="Default Profile Picture" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-            @endif
-
             <div class="details">
                 <p><strong>Name:</strong> {{ $product->name }}</p>
                 <p><strong>Color:</strong> {{ $product->color }}</p>
                 <p><strong>Price:</strong> {{ $product->price }}</p>
                 <p><strong>Category:</strong> {{ $product['category']['name'] }}</p>
             </div>
-            <a href="{{ route('admin.index') }}" class="back-button">Back to List</a>
+            <a href="{{ route('relationship.index') }}" class="back-button">Back to List</a>
         </div>
     </main>
 @endsection
