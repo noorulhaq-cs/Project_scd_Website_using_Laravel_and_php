@@ -101,13 +101,19 @@ class AdminController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
-
+        $query = $request->get('query');
         $products = Product::where('name', 'LIKE', '%' . $query . '%')
-        ->orWhere('description', 'LIKE', '%' . $query . '%')
-        ->get();
-
-        return view('frontend.search-results', compact('product'));
+            ->orWhere('color', 'LIKE', '%' . $query . '%')
+            ->get();
+    
+        if ($request->ajax()) {
+            return view('products.search_result', compact('products'))->render(); // Render the filtered products dynamically
+        }
+    
+        // If not an AJAX request, return the full search page (for direct search)
+        return view('frontend.products.search-results', compact('products'));
     }
+    
+    
 
 }

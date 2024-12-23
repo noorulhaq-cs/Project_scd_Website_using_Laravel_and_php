@@ -126,6 +126,25 @@ a img:hover {
     outline: none;
 }
 
+#search-results {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    display: none; /* Hidden by default */
+}
+
+#search-results li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#search-results li:hover {
+    background: #f0f0f0;
+}
 /* Responsive Design */
 /* @media (max-width: 768px) {
     .search-bar {

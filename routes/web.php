@@ -44,4 +44,6 @@ Route::resource('relationship', RelationshipController::class);
 
 Route::get('/search', [AdminController::class, 'search'])->name('search');
 
+
+
 require __DIR__ . '/auth.php';
