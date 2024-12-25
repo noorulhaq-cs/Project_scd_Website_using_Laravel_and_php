@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Services\AdminService;
 use Illuminate\Http\Request;
-
 
 class AdminController extends Controller
 {
+    protected $adminService;
+
+    public function __construct(AdminService $adminService)
+    {
+        $this->adminService = $adminService;
+    }
+
     // Display a listing of the resource.
     public function index()
     {
-        $products = Product::all();
+        $products = $this->adminService->getAllProducts();
         return view('admin.index', compact('products'));
     }
 
@@ -24,95 +30,58 @@ class AdminController extends Controller
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'color' => 'required',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:3000',
-            'categorie_id' => 'required'
-        ]);
+        $response = $this->adminService->createProduct($request);
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $path = $request->file('image')->store('image', 'public');
-            $filename = basename($path);
-            $data['image'] = $filename;
-        } else {
-            // Handle the case where no image is uploaded
-            $data['image'] = null;  // or provide a default image, etc.
+        if ($response['success']) {
+            return redirect()->route('admin.index')->with('success', $response['message']);
         }
-        
-        Product::create($data);
-        return redirect()->route('admin.index')->with('success', 'Product created successfully.');
+
+        return redirect()->back()->with('error', $response['message']);
     }
 
     // Display the specified resource.
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->adminService->getProductById($id);
         return view('admin.show', compact('product'));
     }
 
     // Show the form for editing the specified resource.
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
+        $product = $this->adminService->getProductById($id);
         return view('admin.edit', compact('product'));
     }
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
-{
-    // Validate the incoming request
-    $data = $request->validate([
-        'name' => 'required',
-        'color' => 'required',
-        'price' => 'required|numeric',
-        'image' => 'nullable|image|mimes:png,jpg,jpeg|max:3000',
-        'categorie_id' => 'required'
-    ]);
+    {
+        $response = $this->adminService->updateProduct($request, $id);
 
-    // Find the product or fail
-    $product = Product::findOrFail($id);
-
-    // Check and handle image upload
-    if ($request->hasFile('image')) {
-        // Delete old image if it exists
-        if ($product->image && file_exists(storage_path('app/public/image/' . $product->image))) {
-            unlink(storage_path('app/public/image/' . $product->image));
+        if ($response['success']) {
+            return redirect()->route('admin.index')->with('success', $response['message']);
         }
 
-        // Store new image and update the 'image' field
-        $path = $request->file('image')->store('image', 'public');
-        $data['image'] = basename($path);
+        return redirect()->back()->with('error', $response['message']);
     }
-
-    // Update the product with validated data
-    $product->update($data);
-
-    // Redirect with success message
-    return redirect()->route('admin.index')->with('success', 'Product updated successfully.');
-}
-
 
     // Remove the specified resource from storage.
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        $response = $this->adminService->deleteProduct($id);
 
-        return redirect()->route('admin.index')->with('success', 'Product deleted successfully.');
+        if ($response['success']) {
+            return redirect()->route('admin.index')->with('success', $response['message']);
+        }
+
+        return redirect()->back()->with('error', $response['message']);
     }
 
+    // Search for products.
     public function search(Request $request)
     {
         $query = $request->get('query');
-        $products = Product::where('name', 'LIKE', '%' . $query . '%')
-            ->orWhere('color', 'LIKE', '%' . $query . '%')
-            ->get();
-        // If not an AJAX request, return the full search page (for direct search)
+        $products = $this->adminService->searchProducts($query);
         return view('admin.search_result', compact('products'));
     }
-    
-    
-
 }
