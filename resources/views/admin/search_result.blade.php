@@ -7,11 +7,6 @@
                 <strong>{{ $product->name }}</strong> 
                 - {{ $product->color }} 
                 - ${{ number_format($product->price, 2) }}
-                
-                @if($product->image)
-                    <br>
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
-                @endif
             </li>
         @endforeach
     </ul>

@@ -80,12 +80,26 @@
 
     <main>
         <div class="container">
+            
             <h2>Product List</h2>
             <a href="{{ route('admin.create') }}">Add New Product</a>
             {{-- <a href="{{ route('relationship.index')  }}" class="btn btn-primary">Display</a> --}}
             @if ($message = Session::get('success'))
                 <div class="success-message">{{ $message }}</div>
             @endif
+{{-- 
+
+
+            <div class="d-flex flex-row-reverse p-2">
+                <input type="text" class="form-control" name="query" id="product-search" placeholder="Search by name or price">
+            </div>
+
+            <ul id="product-results" class="list-group mt-2" style="display: none;">
+                <!-- AJAX search results will appear here -->
+            </ul> --}}
+
+
+
             <table>
                 <tr>
                     <th>Name</th>
@@ -113,5 +127,34 @@
                 @endforeach
             </table>
         </div>
+        
+        @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#product-search').on('keyup', function() {
+                    let query = $(this).val();
+                    if (query.length > 0) {
+                        // Perform the AJAX request
+                        $.ajax({
+                            url: '{{ route('search') }}', // Correct route to the search method
+                            method: 'GET',
+                            data: { query: query },
+                            success: function(response) {
+                                // Update the results section with the response
+                                $('#product-results').html(response);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    } else {
+                        $('#product-results').empty();
+                    }
+                });
+            });
+        </script>
+        @endpush
+
     </main>
+
 @endsection

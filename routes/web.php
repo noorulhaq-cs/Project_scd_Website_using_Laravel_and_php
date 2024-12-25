@@ -36,13 +36,43 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('admin', AdminController::class);
-// ->middleware(ValidAdmin::class);
-Route::resource('categories', CategoryController::class);
-
-Route::resource('relationship', RelationshipController::class);
-
 Route::get('/search', [AdminController::class, 'search'])->name('search');
+
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('/', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('{admin}', [AdminController::class, 'show'])->name('admin.show');
+    Route::get('{admin}/edit', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('{admin}', [AdminController::class, 'update'])->name('admin.update');
+    Route::delete('{admin}', [AdminController::class, 'destroy'])->name('admin.destroy');
+});
+
+// Categories Routes
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('{category}', [CategoryController::class, 'show'])->name('categories.show');
+    Route::get('{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+});
+
+// Relationship Routes
+Route::prefix('relationship')->group(function () {
+    Route::get('/', [RelationshipController::class, 'index'])->name('relationship.index');
+    Route::get('create', [RelationshipController::class, 'create'])->name('relationship.create');
+    Route::post('/', [RelationshipController::class, 'store'])->name('relationship.store');
+    Route::get('{relationship}', [RelationshipController::class, 'show'])->name('relationship.show');
+    Route::get('{relationship}/edit', [RelationshipController::class, 'edit'])->name('relationship.edit');
+    Route::put('{relationship}', [RelationshipController::class, 'update'])->name('relationship.update');
+    Route::delete('{relationship}', [RelationshipController::class, 'destroy'])->name('relationship.destroy');
+});
+
+
+
 
 
 

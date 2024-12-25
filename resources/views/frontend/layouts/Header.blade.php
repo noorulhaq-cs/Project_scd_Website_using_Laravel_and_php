@@ -32,25 +32,41 @@
     <header class="navbar navbar-expand-lg navbar-dark custom-navbar">
         <a class="navbar-brand" href="{{url('/')}}"><img src="{{url('frontend/pictures/logo.png')}}" alt="Brand logo " style="width: 120px;"></a>
 
-        <div class="search-bar">
+        {{-- <div class="search-bar">
             <input 
                 type="text" 
                 class="form-control" 
                 id="product-search" 
                 name="query" 
-                placeholder="Search for products..."
-                autocomplete="off"
-                onkeyup="searchProducts(this.value)">
+                placeholder="Search for products...">
             
-            <div id="product-results" class="row mt-3">
+            <div id="product-results" class="row mt-0">
                 <!-- Results will be loaded dynamically here -->
             </div>
         </div>
     
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> --}}
+
+        <div class="search-bar">
+            <input 
+                type="text" 
+                id="product-search" 
+                name="query" 
+                placeholder="Search for products..." 
+                class="form-control">
+            <button class="search-button">Search</button>
+        </div>
+        
+        <div id="product-results" class="row mt-0">
+            <!-- Results will be loaded dynamically here -->
+        </div>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
