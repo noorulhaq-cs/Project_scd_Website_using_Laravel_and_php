@@ -1,3 +1,39 @@
+
+NOTE:
+The main branch is currently not in a correct state due to an issue where an incorrect file was accidentally pushed.
+
+In the meantime, please refer to the other branches for the correct and up-to-date implementation.
+
+Key Features
+1. CRUD Operations  ( https://github.com/Noor0410/example-app/tree/new_crud_model )
+Effortless resource management through CRUD functionalities:
+
+Create: Add new entries to the database with robust validation.
+Show: Retrieve individual or bulk records.
+Update: Modify existing records dynamically.
+Delete: Safely remove records with confirmation prompts.
+
+2. Image Upload  ( https://github.com/Noor0410/Project_scd/tree/image )
+Easily upload images for resources using a secure file storage mechanism:
+
+Supported Formats: JPG, PNG, GIF.  
+Validation: Enforces file size and format restrictions.
+Storage Options: Local storage.
+
+3. AJAX-Based Search  ( https://github.com/Noor0410/Project_scd/tree/SearchUpdated )
+Real-time, dynamic search functionality powered by AJAX:
+
+Fast and Responsive: Allows users to search without refreshing the page.
+Pagination Support: Load results incrementally for large datasets.
+Custom Filters: Filter by attributes like name, color.
+
+4. API Integration  ( https://github.com/Noor0410/Project_scd/tree/API )
+Easily extend or integrate the service with external systems using APIs:
+
+Endpoints for CRUD Operations
+Authentication with JWT Tokens
+
+
 HEAD
 # Project_scd
 =======
