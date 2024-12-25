@@ -32,10 +32,14 @@ class AdminController extends Controller
             'categorie_id' => 'required'
         ]);
 
-        
-        $path = $request->file('image')->store('image','public');
-        $filename = basename($path);
-        $data['image'] = $filename;
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $path = $request->file('image')->store('image', 'public');
+            $filename = basename($path);
+            $data['image'] = $filename;
+        } else {
+            // Handle the case where no image is uploaded
+            $data['image'] = null;  // or provide a default image, etc.
+        }
         
         Product::create($data);
         return redirect()->route('admin.index')->with('success', 'Product created successfully.');

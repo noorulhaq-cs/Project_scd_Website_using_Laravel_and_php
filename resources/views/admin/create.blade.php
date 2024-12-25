@@ -101,7 +101,7 @@
                 </div>
                 <div>
                     <label for="image">Choose File</label>
-                    <input type="file" name="image" id="image">
+                    <input type="file" name="image" id="image" accept=".png, .jpg, .jpeg">
                 </div>
                 <div>
                     <label for="categorie_id">Category:</label>
