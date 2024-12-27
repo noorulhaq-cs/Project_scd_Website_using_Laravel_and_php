@@ -4,24 +4,31 @@
 <body>
     <div class="product-page">
         <div class="breadcrumb">
-            <a href="{{url('/')}}">Home</a> / <a href="{{url('/Shirts')}}">T-Shirt</a>
+            <a href="{{ url('/') }}">Home</a> / <a href="{{ url('/Shirts') }}">T-Shirt</a>
         </div>
 
         <div class="product-details">
+            <!-- Main product image -->
             <div class="product-image">
-                <img src="frontend/pictures/sample1.png" alt="Men's Fashion T-Shirt" id="mainImage">
+                <img src="{{ asset('storage/image/'.$product->image) }}" alt="{{ $product->name }}" id="mainImage">
+
+                <!-- Thumbnail images -->
                 <div class="thumbnail-images">
-                    <img src="frontend/pictures/sample2.png" alt="Blue T-Shirt" onclick="changeImage('frontend/pictures/sample2.png')">
-                    <img src="frontend/pictures/g2.png" alt="White T-Shirt" onclick="changeImage('frontend/pictures/g2.png')">
-                    <img src="frontend/pictures/g3.png" alt="Red T-Shirt" onclick="changeImage('frontend/pictures/g3.png')">
-                    <img src="frontend/pictures/g4.png" alt="Green T-Shirt" onclick="changeImage('frontend/pictures/g4.png')">
+                    <!-- Loop through thumbnails -->
+                    @if ($product->thumbnails) <!-- Assuming thumbnails are stored as a JSON array -->
+                        @foreach (json_decode($product->thumbnails) as $thumbnail)
+                            <img src="{{ asset($thumbnail) }}" alt="{{ $product->name }}" 
+                                 onclick="changeImage('{{ asset($thumbnail) }}')">
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
+            <!-- Product Information -->
             <div class="product-info">
-                <h1>Fashion T-Shirts</h1>
+                <h1>{{ $product->name }}</h1>
                     
-                <p class="price">RS:1200</p>
+                <p class="price">RS: {{ $product->price }}</p>
 
                 <label for="size">Select Size</label>
                 <select id="size">
@@ -55,3 +62,6 @@
 
 </body>
 @endsection
+                    
+                
+                    

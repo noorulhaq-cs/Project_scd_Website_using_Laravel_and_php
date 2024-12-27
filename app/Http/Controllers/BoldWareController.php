@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ use App\Http\Controllers\Controller;
 class BoldWareController extends Controller
 {
     public function home(){
-        return view("frontend.BoldWare");
+        $products = Product::all();
+        return view("frontend.BoldWare" , compact("products"));
     }
 
     public function Men(){
@@ -41,7 +43,9 @@ class BoldWareController extends Controller
         return view("frontend.Shirts");
     }
 
-    public function Product_detail(){
-        return view("frontend.Product_detail");
+    public function Product_detail($id){
+        $product = Product::findOrFail($id);
+        return view("frontend.Product_detail" , compact("product"));
+        
     }
 }
