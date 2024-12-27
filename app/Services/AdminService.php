@@ -121,4 +121,5 @@ class AdminService
             ->orWhere('color', 'LIKE', '%' . $query . '%')
             ->get();
     }
+    
 }
