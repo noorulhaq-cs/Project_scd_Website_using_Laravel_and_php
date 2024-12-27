@@ -31,5 +31,5 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('/{id}', [AdminApiController::class, 'destroy'])->name('destroy'); // Delete a specific product
         Route::get('/search', [AdminApiController::class, 'search'])->name('search');  // Search for products
     });
-    
 });
+
